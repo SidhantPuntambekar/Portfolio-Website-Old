@@ -1,0 +1,39 @@
+#navbar {
+	list-style-type: none;
+	padding: 0;
+	overflow: hidden;
+	border-top: 1px solid #454545;
+	border-bottom: 1px solid #454545;
+}
+
+.navbarLink {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.navbarItem .navbarLink {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: inherit;
+}
+
+.navbarItem .navbarLink:hover {
+	background-color: silver;
+}
+
+.navbarItem {
+	width: 100%;
+	margin: auto;
+}
+
+.navbarItem.active {
+	background-color: lightgray;
+}
+
+@media (min-width: 900px) {
+	.navbarItem {
+		width: 20%;
+		float: left;
+	}
+}
