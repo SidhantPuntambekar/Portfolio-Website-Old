@@ -1,2 +1,2 @@
 # Portfolio-Website
-Sidhant Puntambekar Portfolio Website. WIP
+Sidhant Puntambekar Portfolio Website. WIP.
