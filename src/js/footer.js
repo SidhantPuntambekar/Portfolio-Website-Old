@@ -19,5 +19,15 @@ const icons =
     {
         icon: FaGithub,
         path: "https://github.com/SidhantPuntambekar"
+    },
+    linkedin:
+    {
+        icon: FaLinkedin,
+        path: "https://www.linkedin.com/in/sidhant-puntambekar-0bb881130/"
+    },
+    spotify:
+    {
+        icon: FaSpotify,
+        path: 
     }
 }
