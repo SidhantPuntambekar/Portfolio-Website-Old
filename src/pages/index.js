@@ -1,9 +1,9 @@
 import React from "react";
-import Carousel from "../components/carousel.js";
-import Footer from "../components/Footer.js";
-import Header from "../components/Header.js";
-import ResponsiveContainer from "../components/ResponsiveContainer.js";
-import SelectionList from "../components/SelectionList.js";
+import Carousel from "../components/Carousel";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import ResponsiveContainer from "../components/ResponsiveContainer";
+import SelectionList from "../components/SelectionList";
 import "../styles/Index.css";
 
 function CarouselInformation(title, description, items) 
