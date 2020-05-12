@@ -1,0 +1,56 @@
+root {
+	--animation-name: fadeIn;
+}
+
+body {
+	background-color: #EEEEEE;
+	color: #454545;
+	font-size: 120%;
+	line-height: 1.4;
+	padding-left: 1%;
+	padding-right: 1%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1;
+}
+
+h2 {
+	margin-bottom: 1%;
+}
+
+a {
+	color: #0077AA;
+}
+
+.hidden {
+	display: none
+}
+
+.animation {
+	position: relative;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+	animation-name: var(--animation-name);
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		z-index: -1;
+	}
+	to {
+		opacity: 0;
+		z-index: -1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

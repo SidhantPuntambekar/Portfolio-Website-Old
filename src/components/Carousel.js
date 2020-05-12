@@ -1,11 +1,8 @@
 import React from "react";
 import "../styles/Carousel.css";
 
-/**
- * A class that has a circular list of html components
- * Allows for user control but does NOT automatically go through elements with a timer
- * Similar to a slideshow
- */
+export let carouselCounter = 0;
+
 class Carousel extends React.Component {
 
 	constructor(props) {
@@ -13,36 +10,41 @@ class Carousel extends React.Component {
 		this.state = {
 			currentItemIndex: 0
 		};
+		this.carouselNumber = carouselCounter;
+		carouselCounter++;
 		this.oldItemIndex = null;
+		this.changeDirection = null;
 	}
 
 	movePosition(amount) {
 		this.oldItemIndex = this.state.currentItemIndex;
+		this.changeDirection = amount > 0? "rtl" : "ltr";
 		this.setState({
 			...this.state,
 			currentItemIndex: this.state.currentItemIndex + amount
 		});
 	}
 
-	componentDidUpdate(prevProps, prevState, snapshot) {
-		const numberChildren = React.Children.toArray(this.props.children).length;
-		if (this.props.children !== prevProps.children) {
+	componentWillUpdate(nextProps, nextState, nextContext) {
+		const numberChildren = React.Children.toArray(nextProps.children).length;
+		if (nextProps.children !== this.props.children) {
+			this.changeDirection = null;
 			this.oldItemIndex = null;
 		}
-		let newPosition = this.state.currentItemIndex % numberChildren;
+		let newPosition = nextState.currentItemIndex % numberChildren;
 		while (newPosition < 0) {
 			newPosition += numberChildren;
 		}
-		if (this.state.currentItemIndex !== newPosition) {
+		if (nextState.currentItemIndex !== newPosition) {
 			this.setState({
-				...this.state,
+				...nextState,
 				currentItemIndex: newPosition
 			});
 		}
 	}
 
 	render() {
-		const id = `carousel${this.props.title}`;
+		const id = `carousel${this.carouselNumber}`;
 		const makeCarouselControls = () => (
 			<fieldset className={"carouselControlBox"} aria-label={"carousel controls"} aria-controls={id}>
 				<button className={"carouselControl"} onClick={() => this.movePosition(-1)} aria-label={"previous"}>&#10094;</button>
@@ -52,17 +54,19 @@ class Carousel extends React.Component {
 		return <div className={"carousel"} id={id} aria-live={"polite"}>
 			<h3>{this.props.title}</h3>
 			{makeCarouselControls()}
-			<ul className={"carouselContentList"}>{
+			<ul className={"carouselContent"}>{
 				React.Children.toArray(this.props.children).map((child, index) => {
-					let childContainerClassName = this.state.currentItemIndex === index ? "" : "hidden";
+					let className = this.state.currentItemIndex === index? "" : "hiddenCarouselItem";
 					let style = {};
-					if (this.oldItemIndex !== null && [this.state.currentItemIndex, this.oldItemIndex].includes(index)) {
-						childContainerClassName = "animation";
-						style["--animation-name"] = index === this.state.currentItemIndex ? "fadeIn" : "fadeOut";
+					if (this.changeDirection !== null && [this.state.currentItemIndex, this.oldItemIndex].includes(index)) {
+						className = "animation";
+						if (index === this.state.currentItemIndex) {
+							style["--animation-name"] = "enter" + (this.changeDirection === "rtl"? "Right" : "Left");
+						} else {
+							style["--animation-name"] = "exit" + (this.changeDirection === "rtl"? "Left" : "Right");
+						}
 					}
-					return <li aria-hidden={index !== this.state.currentItemIndex} className={"carouselItem"} key={index}>
-						<div className={childContainerClassName} style={style}>{child}</div>
-					</li>
+					return <li aria-hidden={index !== this.state.currentItemIndex} className={className} style={style}>{child}</li>
 				})
 			}</ul>
 			{makeCarouselControls()}

@@ -1,3 +1,7 @@
+root {
+	--animation-name: enterLeft;
+}
+
 .carousel {
 	text-align: center;
 	display: flex;
@@ -7,18 +11,29 @@
 
 .carouselContentList {
 	list-style: none;
-	height: 70rem;
+	min-height: 500px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	position: relative;
-	padding: 0;
-	margin: 0;
+	padding: 5px;
 }
 
 .carouselItem {
 	position: absolute;
 	width: 100%;
+}
+
+.hiddenCarouselContent {
+	display: none;
+}
+
+.animation {
+	position: relative;
+	animation-duration: 0.5s;
+	animation-timing-function: ease-out;
+	animation-fill-mode: forwards;
+	animation-name: var(--animation-name);
 }
 
 .carouselControlBox {
@@ -44,20 +59,20 @@
 	cursor: pointer;
 }
 
-@media (min-width: 450px) {
-	.carouselContentList {
-		height: 50rem;
+@keyframes exit {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
 	}
 }
 
-@media (min-width: 900px) {
-	.carouselContentList {
-		height: 40rem;
+@keyframes enter {
+	from {
+		opacity: 0;
 	}
-}
-
-@media (min-width: 1350px) {
-	.carouselContentList {
-		height: 35rem;
+	to {
+		opacity: 1;
 	}
 }

@@ -1,0 +1,17 @@
+.footerLink {
+	display: inline-block;
+	text-align: center;
+	padding-top: 3px;
+	color: inherit;
+}
+
+.footerLink:hover {
+	background-color: silver;
+}
+
+footer {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top: 1px solid #454545;
+	border-bottom: 1px solid #454545;
+}
